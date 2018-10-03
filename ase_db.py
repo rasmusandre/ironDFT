@@ -23,8 +23,8 @@ def print_energies(Is_varying):
 
 def db_deleter():
 
-    param = 'lattice_constant'
-    db = connect('single_fe.db')
+    param = 'smearing_factor'
+    db = connect('single_fe_fm.db')
     for obj in db.select(is_varying = param):
 
         del db[obj.id]
@@ -48,8 +48,7 @@ def plot_from_db(Is_varying, database_name):
         plt.semilogx(changing_parameter, energies, '*')
     plt.ylabel('Potential Energy, eV')
     plt.xlabel(Is_varying)
-
+    plt.show()
 
 #db_deleter()
-plot_from_db('lattice_constant', 'single_fe_fm.db')
-plt.show()
+plot_from_db('energy_cutoff','single_fe_fm.db')

@@ -16,9 +16,9 @@ def create_calculator(ec, nb, x_c, k_pts, FD, name):
 
 def run_parameter_iterator():
 
-    start_iteration = 2
-    end_iteration = 11
-    increment = 1
+    start_iteration = 200
+    end_iteration = 1000
+    increment = 100
 
     st_lattice_cnst = 2.87
     st_ec = 600
@@ -26,7 +26,7 @@ def run_parameter_iterator():
     st_xc = 'PBE'
     st_kpts = 8
     st_FD = 0.1
-    is_varying = 'lattice_constant'
+    is_varying = 'energy_cutoff'
 
     changing_parameter, energies =  parameter_iterator(start_iteration, end_iteration, increment, st_lattice_cnst, st_ec, st_nb, st_xc, st_kpts, st_FD, is_varying)
 
