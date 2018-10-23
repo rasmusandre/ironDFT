@@ -1,0 +1,13 @@
+For 1 Fe atom:
+
+E_c = 500
+nb = -2
+kpts = 7
+smear = 0.05
+
+for 64 try:
+
+E_c = 600
+nb = -8
+kpts = 4
+smear = 0.05
