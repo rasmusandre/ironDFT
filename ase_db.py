@@ -6,10 +6,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def save_atoms(my_atoms, E_c, Nbands, Kpts, Fermi_dirac, Lattice_constant, Is_varying):
+def save_atoms(my_atoms, E_c, Nbands, Kpts, Fermi_dirac, Lattice_constant, Magnetic_moment, Is_varying):
 
-    db = connect('single_fe.db')
-    db.write(my_atoms, energy_cutoff = E_c, nbands = Nbands, k_points = Kpts, smearing_factor = Fermi_dirac, lattice_constant = Lattice_constant, is_varying = Is_varying)
+    db = connect('single_fe_mag.db')
+    db.write(my_atoms, energy_cutoff = E_c, nbands = Nbands, k_points = Kpts, smearing_factor = Fermi_dirac, lattice_constant = Lattice_constant, magnetic_moment = Magnetic_moment, is_varying = Is_varying)
 
 def print_energies(Is_varying):
 
@@ -43,7 +43,7 @@ def plot_from_db(Is_varying, database_name):
         changing_parameter.append(obj[Is_varying])
 
     plt.figure(0)
-    if Is_varying == 'lattice_constant':
+    if Is_varying == 'lattice_constant' or Is_varying == 'magnetic_moment':
         plt.plot(changing_parameter, energies)
         plt.plot(changing_parameter, energies, '*')
     else:
@@ -131,12 +131,50 @@ def show_min_lc():
     print(np.roots(pbev))
     print(np.roots(blypv))
 
+def bulk_modulus():
 
+    energy, lattice_const = plot_from_db('lattice_constant', 'single_fe.db')
+
+    second_order_coeffs = np.polyfit(lattice_const, energy, 2)
+
+    print('The estimated lattice constant is:')
+
+    second_order_coeffs_deriv = np.polyder(second_order_coeffs)
+    estimated_lattice_const = (np.roots(second_order_coeffs_deriv))
+    estimated_lattice_const = estimated_lattice_const[0]
+    print(estimated_lattice_const)
+
+    print('The values of the polynomial fit are:')
+
+    print(second_order_coeffs)
+
+    print('The bulk modulus (GPa) is found to be:')
+    bulk_mod = 2*2*second_order_coeffs[0]*160.2*1/(9*estimated_lattice_const)
+    print(bulk_mod)
+
+    print('The speed of sound (m/s) is found to be:')
+    density = 7.874*(1/1000)*(100**3)
+
+    speed_of_sound = ((bulk_mod*10**9)/density)**(1/2)
+    print(speed_of_sound)
+
+    print('The Debye frequency (rad/s) is found to be:')
+    number_density = 2/((estimated_lattice_const*10**(-10))**3)
+    debye_freq = 6*np.pi*np.pi*number_density*(speed_of_sound)**3
+    print((debye_freq)**(1/3))
+
+    print('The Debye temperature (K) is found to be:')
+
+    planck_con = 1.055*10**-34
+    boltz_con = 1.381*10**-23
+
+    print((planck_con/boltz_con)*debye_freq**(1/3))
 
 
 #plot_from_db_two_db('energy_cutoff','single_cu2.db','cu_kpts.db')
-plot_from_db('lattice_constant','single_fe.db')
+plot_from_db('magnetic_moment','single_fe_mag.db')
 plt.show()
+#bulk_modulus()
 #plot_from_db('lattice_constant', 'single_cu_xc_BLYP.db')
 #plt.show()
 #show_min_lc()
