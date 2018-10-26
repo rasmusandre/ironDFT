@@ -8,7 +8,7 @@ import numpy as np
 
 def save_atoms(my_atoms, E_c, Nbands, Kpts, Fermi_dirac, Lattice_constant, Magnetic_moment, Is_varying):
 
-    db = connect('single_fe_mag.db')
+    db = connect('single_fe_ver2.db')
     db.write(my_atoms, energy_cutoff = E_c, nbands = Nbands, k_points = Kpts, smearing_factor = Fermi_dirac, lattice_constant = Lattice_constant, magnetic_moment = Magnetic_moment, is_varying = Is_varying)
 
 def print_energies(Is_varying):
@@ -26,8 +26,8 @@ def print_energies(Is_varying):
 
 def db_deleter():
 
-    param = 'lattice_constant'
-    db = connect('single_cu_bcc.db')
+    param = 'magnetic_moment'
+    db = connect('single_fe_ver2.db')
     for obj in db.select(is_varying = param):
 
         del db[obj.id]
@@ -41,6 +41,7 @@ def plot_from_db(Is_varying, database_name):
 
         energies.append(obj['energy'])
         changing_parameter.append(obj[Is_varying])
+        #print(obj['k_points'])
 
     plt.figure(0)
     if Is_varying == 'lattice_constant' or Is_varying == 'magnetic_moment':
@@ -50,7 +51,7 @@ def plot_from_db(Is_varying, database_name):
         plt.semilogx(changing_parameter, energies)
         plt.semilogx(changing_parameter, energies, '*')
     plt.ylabel('Potential energy [eV/atom]')
-    plt.xlabel('Lattice constant [Å]')
+    plt.xlabel('Varying parameter = ' + Is_varying)
     #plt.show()
     return energies, changing_parameter
 
@@ -172,7 +173,7 @@ def bulk_modulus():
 
 
 #plot_from_db_two_db('energy_cutoff','single_cu2.db','cu_kpts.db')
-plot_from_db('magnetic_moment','single_fe_mag.db')
+plot_from_db('magnetic_moment','single_fe_ver2.db')
 plt.show()
 #bulk_modulus()
 #plot_from_db('lattice_constant', 'single_cu_xc_BLYP.db')

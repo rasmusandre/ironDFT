@@ -14,17 +14,17 @@ def create_calculator(ec, nb, x_c, k_pts, FD, name):
 
 def run_parameter_iterator():
 
-    start_iteration = 1
-    end_iteration = 3.5
-    increment = 0.5
+    start_iteration = 0.75
+    end_iteration = 6
+    increment = 0.75
 
     st_lattice_cnst = 2.86
-    st_ec = 600
-    st_nb = -10
+    st_ec = 500
+    st_nb = -5
     st_xc = 'PBE'
     st_kpts = 7
     st_FD = 0.05
-    st_mag = 2.2
+    st_mag = 2 #Edit this?
     is_varying = 'magnetic_moment'
     save_to_db = True
 
@@ -47,11 +47,16 @@ def parameter_iterator(start_iteration, end_iteration, increment, st_lattice_cns
             b = k
 
         if is_varying == 'magnetic_moment':
-            bulk_mat = Atoms('Fe2',
-                       scaled_positions=[(0, 0, 0),(0.5, 0.5, 0.5)],
-                       magmoms=[k,k],
+            bulk_mat = Atoms('Fe',
+                       scaled_positions=[(0, 0, 0)],
+                       magmoms=[k],
                        cell=(b, b, b),
                        pbc=True)
+            #bulk_mat = Atoms('Fe2',
+            #           scaled_positions=[(0, 0, 0),(0.5, 0.5, 0.5)],
+            #           magmoms=[k,k],
+            #           cell=(b, b, b),
+            #           pbc=True)
 
         else:
             bulk_mat = Atoms('Fe',

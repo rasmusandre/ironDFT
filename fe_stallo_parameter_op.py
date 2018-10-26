@@ -55,4 +55,4 @@ if __name__ == "__main__":
 
     bulk_mat.get_potential_energy()
     calc.write('Fe.gpw')
-    save_atoms(bulk_mat, e_cut, nbands, k_pts, smear, a, is_varying)
+    #save_atoms(bulk_mat, e_cut, nbands, k_pts, smear, a, is_varying)
