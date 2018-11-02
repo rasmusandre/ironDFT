@@ -14,9 +14,9 @@ def create_calculator(ec, nb, x_c, k_pts, FD, name):
 
 def run_parameter_iterator():
 
-    start_iteration = 0.75
-    end_iteration = 6
-    increment = 0.75
+    start_iteration = 0.0
+    end_iteration = 5
+    increment = 0.5
 
     st_lattice_cnst = 2.86
     st_ec = 500
@@ -51,7 +51,7 @@ def parameter_iterator(start_iteration, end_iteration, increment, st_lattice_cns
                        scaled_positions=[(0, 0, 0)],
                        magmoms=[k],
                        cell=(b, b, b),
-                       pbc=True)
+                       pbc=True)#*(2,1,1)
             #bulk_mat = Atoms('Fe2',
             #           scaled_positions=[(0, 0, 0),(0.5, 0.5, 0.5)],
             #           magmoms=[k,k],

@@ -36,14 +36,16 @@ calc = GPAW('Si_gs.gpw',
 
 calc.get_potential_energy()
 e_f = calc.get_fermi_level()
-e, dos = calc.get_dos(spin=0, npts=2001, width=0.1)
+e1, dos1 = calc.get_dos(spin=1, npts=2001, width=0.1) #What is spin?
+e0, dos0 = calc.get_dos(spin=0, npts=2001, width=0.1)
 
 plt.figure(0)
-plt.plot(dos, e)
+plt.plot(dos1, e1)
+plt.plot(dos0, e0)
 plt.plot([0,4], e_f*np.ones(2),'r--')
-plt.ylim(-1,17.5)
+plt.ylim(-0.2,e_f+10)
 plt.xlim(0,4)
-plt.legend(['DOS', 'Fermi level'],fancybox=True, framealpha=1,shadow=True,prop={'size': 10})
+plt.legend(['DOS spin up','Dos spin down', 'Fermi level'],fancybox=True, framealpha=1,shadow=True,prop={'size': 10})
 plt.xlabel('Density of states [1/eV]')
 plt.ylabel('Energy [eV]')
 plt.show()

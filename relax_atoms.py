@@ -1,4 +1,5 @@
 from ase.build import bulk
+from ase import Atoms
 from ase.db import connect
 from ase.visualize import view
 from ase.optimize.precon import PreconLBFGS
@@ -7,9 +8,9 @@ from gpaw import GPAW, PW, FermiDirac
 import sys
 
 
-def save_atoms(my_atoms, E_c, Nbands, Kpts, Fermi_dirac, Lattice_constant, Is_varying, database):
+def save_atoms(my_atoms, E_c, Nbands, Kpts, Fermi_dirac, Lattice_constant, Is_varying):
 
-    db = connect(database)
+    db = connect('fe_kpts.db')
     db.write(my_atoms, energy_cutoff = E_c,
              nbands = Nbands, k_points = Kpts,
              smearing_factor = Fermi_dirac,
@@ -19,23 +20,28 @@ def save_atoms(my_atoms, E_c, Nbands, Kpts, Fermi_dirac, Lattice_constant, Is_va
 if __name__ == "__main__":
 
     a = 2.86
-    e_cut = int(sys.argv[1])
-    nbands = int(sys.argv[2])
+    e_cut = 500
+    nbands = -5
     xc = 'PBE'
-    k_pts = sys.argv[3]
+    k_pts = 5
     k_pts = int(k_pts)
-    smear = float(sys.argv[4])
+    smear = 0.1
     #set hunds rule
     #precon lfgs variable_cell = true
 
-    atoms = sys.argv[5]
+    atoms = 1
     atoms = int(atoms)
 
-    bulk_mat = bulk('Fe','bcc',a)
+    #bulk_mat = bulk('Fe','bcc',a, cubic = True)
+    bulk_mat = Atoms('FeCu',positions=[(0,0,0),(10,10,10)],cell = [(a/2,a/2,-a/2), (a/2,-a/2,a/2), (-a/2, a/2, a/2)], pbc = True)
+
+    view(bulk_mat)
     print(len(bulk_mat))
-    bulk_mat.set_initial_magnetic_moments([2.2])
-    bulk_mat = bulk_mat*(atoms,atoms,atoms)
-    is_varying = str(sys.argv[6])
+    bulk_mat.set_initial_magnetic_moments([2.0, 2.0])
+    print(bulk_mat.get_positions())
+    bulk_mat = bulk_mat#*(atoms,atoms,atoms)
+
+    is_varying = 'nothing'
 
 
 
@@ -45,13 +51,14 @@ if __name__ == "__main__":
 
 
     bulk_mat.set_calculator(calc)
-    traj = Trajectory('bulk_fe.traj', 'w', bulk_mat)
+    traj = Trajectory('some_test.traj', 'w', bulk_mat)
 
-    relaxer = PreconLBFGS(bulk_mat, variable_cell = True, logfile = 'my_log.txt')
-    relaxer.attach(traj)
-    relaxer.run(fmax = 0.025, smax = 0.003)
+    #relaxer = PreconLBFGS(bulk_mat, variable_cell = True, logfile = 'my_log.txt')
+    #relaxer.attach(traj)
+    #relaxer.run(fmax = 0.025, smax = 0.003)
 
 
     bulk_mat.get_potential_energy()
+    print(bulk_mat.get_magnetic_moments())
+    print(bulk_mat.get_positions())
     calc.write('Fe.gpw')
-    save_atoms(bulk_mat, e_cut, nbands, k_pts, smear, a, is_varying, str(sts.argv[7]))
