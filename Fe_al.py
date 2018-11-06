@@ -9,14 +9,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def create_calculator(ec, nb, x_c, k_pts, FD, name):
-    calc = GPAW(mode=PW(ec), nbands = nb, xc=x_c,spinpol = True, kpts=(k_pts, k_pts, k_pts), occupations=FermiDirac(FD, fixmagmom = True), txt=name + '.txt')
+    calc = GPAW(mode=PW(ec), nbands = nb, xc=x_c,spinpol = True, kpts=(k_pts, k_pts, k_pts), occupations=FermiDirac(FD, fixmagmom = False), txt=name + '.txt')
     return calc
 
 def run_parameter_iterator():
 
-    start_iteration = 0.0
-    end_iteration = 5
-    increment = 0.5
+    start_iteration = 200
+    end_iteration = 500
+    increment = 100
 
     st_lattice_cnst = 2.86
     st_ec = 500
@@ -25,7 +25,7 @@ def run_parameter_iterator():
     st_kpts = 7
     st_FD = 0.05
     st_mag = 2 #Edit this?
-    is_varying = 'magnetic_moment'
+    is_varying = 'energy_cutoff'
     save_to_db = True
 
     changing_parameter, energies =  parameter_iterator(start_iteration, end_iteration, increment, st_lattice_cnst, st_ec, st_nb, st_xc, st_kpts, st_FD, st_mag, save_to_db, is_varying)
@@ -51,8 +51,8 @@ def parameter_iterator(start_iteration, end_iteration, increment, st_lattice_cns
                        scaled_positions=[(0, 0, 0)],
                        magmoms=[k],
                        cell=(b, b, b),
-                       pbc=True)#*(2,1,1)
-            #bulk_mat = Atoms('Fe2',
+                       pbc=True)
+            # bulk_mat = Atoms('Fe2',
             #           scaled_positions=[(0, 0, 0),(0.5, 0.5, 0.5)],
             #           magmoms=[k,k],
             #           cell=(b, b, b),
@@ -84,7 +84,7 @@ def parameter_iterator(start_iteration, end_iteration, increment, st_lattice_cns
         bulk_mat.set_calculator(calc)
         energy = bulk_mat.get_potential_energy()
         calc.write(name + '.gpw')
-
+        print(bulk_mat.get_magnetic_moments())
 
         if (save_to_db == True):
             if is_varying == 'energy_cutoff':

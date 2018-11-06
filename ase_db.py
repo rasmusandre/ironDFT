@@ -8,7 +8,7 @@ import numpy as np
 
 def save_atoms(my_atoms, E_c, Nbands, Kpts, Fermi_dirac, Lattice_constant, Magnetic_moment, Is_varying):
 
-    db = connect('double_fe_mag.db')
+    db = connect('fe_test.db')
     db.write(my_atoms, energy_cutoff = E_c, nbands = Nbands, k_points = Kpts, smearing_factor = Fermi_dirac, lattice_constant = Lattice_constant, magnetic_moment = Magnetic_moment, is_varying = Is_varying)
 
 def print_energies(Is_varying):
@@ -45,13 +45,20 @@ def plot_from_db(Is_varying, database_name):
 
     plt.figure(0)
     if Is_varying == 'lattice_constant' or Is_varying == 'magnetic_moment':
-        plt.plot(changing_parameter, energies)
-        plt.plot(changing_parameter, energies, '*')
+        if Is_varying == 'magnetic_moment':
+            plt.plot(changing_parameter, [i/2 for i in energies])
+            plt.plot(changing_parameter, [i/2 for i in energies], 'ro')
+        else:
+            plt.plot(changing_parameter, energies)
+            plt.plot(changing_parameter, energies, '*')
     else:
         plt.semilogx(changing_parameter, energies)
         plt.semilogx(changing_parameter, energies, '*')
     plt.ylabel('Potential energy [eV/atom]')
     plt.xlabel('Varying parameter = ' + Is_varying)
+    if (Is_varying == 'magnetic_moment'):
+        plt.xlabel('Magnetic moment [' + r'$\mu_{B}$' + '/atom]')
+        plt.grid('True')
     #plt.show()
     return energies, changing_parameter
 
@@ -101,6 +108,8 @@ def plot_from_db_two_db(Is_varying, database_name1, database_name2):
             plt.plot([k/(8.62*10**-5) for k in changing_parameter2], energies2, 'r+',label='_nolegend_')
             plt.xlabel('smearing factor [K]')
         else:
+            if (Is_varying == 'energy_cutoff'):
+                changing_parameter2, energies2 = (list(t) for t in zip(*sorted(zip(changing_parameter2, energies2))))
             plt.plot(changing_parameter2, energies2,'r')
             plt.plot(changing_parameter2, energies2, 'r+',label='_nolegend_')
             plt.xlabel(r'$E_{cut}$'+' [eV]')
@@ -172,9 +181,9 @@ def bulk_modulus():
     print((planck_con/boltz_con)*debye_freq**(1/3))
 
 
-#plot_from_db_two_db('energy_cutoff','single_cu2.db','cu_kpts.db')
-plot_from_db('magnetic_moment','single_fe_mag.db')
-plt.show()
+#plot_from_db_two_db('smearing_factor','single_fe_ver2.db','fe_kpts.db')
+#plot_from_db('smearing_factor','fe_kpts.db')
+#plt.show()
 #bulk_modulus()
 #plot_from_db('lattice_constant', 'single_cu_xc_BLYP.db')
 #plt.show()

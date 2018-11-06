@@ -6,10 +6,11 @@ from ase.phonons import Phonons
 
 # Setup crystal and EMT calculator
 atoms = bulk('Fe', 'bcc', a=2.86)
+atoms.set_initial_magnetic_moments([2.2])
 calc = GPAW()
 
 # Phonon calculator
-N = 4
+N = 2
 ph = Phonons(atoms, calc, supercell=(N, N, N), delta=0.05)
 ph.run()
 
@@ -40,7 +41,7 @@ omega_kn = 1000 * ph.band_structure(path_kc)
 omega_e, dos_e = ph.dos(kpts=(50, 50, 50), npts=5000, delta=5e-4)
 omega_e *= 1000
 
-# Plot the band structure and DOS
+#Plot the band structure and DOS
 import matplotlib.pyplot as plt
 plt.figure(1, (8, 6))
 plt.axes([.1, .07, .67, .85])
