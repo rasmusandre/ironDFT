@@ -8,7 +8,7 @@ import numpy as np
 
 def save_atoms(my_atoms, E_c, Nbands, Kpts, Fermi_dirac, Lattice_constant, Magnetic_moment, Is_varying):
 
-    db = connect('fe_test.db')
+    db = connect('single_fe_PBE_bulk.db')
     db.write(my_atoms, energy_cutoff = E_c, nbands = Nbands, k_points = Kpts, smearing_factor = Fermi_dirac, lattice_constant = Lattice_constant, magnetic_moment = Magnetic_moment, is_varying = Is_varying)
 
 def print_energies(Is_varying):
@@ -123,9 +123,9 @@ def plot_from_db_two_db(Is_varying, database_name1, database_name2):
 
 
 def show_min_lc():
-    en_lda, cp_lda = plot_from_db('lattice_constant', 'single_cu_xc_LDA2.db')
-    en_pbe, cp_pbe = plot_from_db('lattice_constant', 'single_cu_xc_PBE.db')
-    en_blyp, cp_blyp = plot_from_db('lattice_constant', 'single_cu_xc_BLYP2.db')
+    en_lda, cp_lda = plot_from_db('lattice_constant', 'single_fe_LDA_bulk.db')
+    en_pbe, cp_pbe = plot_from_db('lattice_constant', 'single_fe_PBE_bulk.db')
+    en_blyp, cp_blyp = plot_from_db('lattice_constant', 'single_fe_BLYP_bulk.db')
     print('The min values in the dataset are:')
     print(cp_lda[en_lda.index(min(en_lda))])
     print(cp_pbe[en_pbe.index(min(en_pbe))])
@@ -181,13 +181,13 @@ def bulk_modulus():
     print((planck_con/boltz_con)*debye_freq**(1/3))
 
 
-#plot_from_db_two_db('smearing_factor','single_fe_ver2.db','fe_kpts.db')
-#plot_from_db('smearing_factor','fe_kpts.db')
+#plot_from_db_two_db('lattice_constant','single_fe.db','fe_kpts.db')
+#plot_from_db('lattice_constant','single_fe_BLYP.db')
 #plt.show()
 #bulk_modulus()
 #plot_from_db('lattice_constant', 'single_cu_xc_BLYP.db')
 #plt.show()
-#show_min_lc()
+show_min_lc()
 #plt.savefig('my_fig.png')
 #plot_from_db('lattice_constant', 'single_cu_xc_LDA2.db')
 #plt.show()
