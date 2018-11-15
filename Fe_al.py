@@ -14,8 +14,8 @@ def create_calculator(ec, nb, x_c, k_pts, FD, name):
 
 def run_parameter_iterator():
 
-    start_iteration = 2.4
-    end_iteration = 3.2
+    start_iteration = 0.01
+    end_iteration = 1
     increment = 0.1
 
     st_lattice_cnst = 2.86
@@ -25,7 +25,7 @@ def run_parameter_iterator():
     st_kpts = 7
     st_FD = 0.05
     st_mag = 2 #Edit this?
-    is_varying = 'lattice_constant'
+    is_varying = 'smearing_factor'
     save_to_db = True
 
     changing_parameter, energies =  parameter_iterator(start_iteration, end_iteration, increment, st_lattice_cnst, st_ec, st_nb, st_xc, st_kpts, st_FD, st_mag, save_to_db, is_varying)

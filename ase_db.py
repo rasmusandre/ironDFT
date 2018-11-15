@@ -8,7 +8,7 @@ import numpy as np
 
 def save_atoms(my_atoms, E_c, Nbands, Kpts, Fermi_dirac, Lattice_constant, Magnetic_moment, Is_varying):
 
-    db = connect('single_fe_PBE_bulk.db')
+    db = connect('fe_1atom.db')
     db.write(my_atoms, energy_cutoff = E_c, nbands = Nbands, k_points = Kpts, smearing_factor = Fermi_dirac, lattice_constant = Lattice_constant, magnetic_moment = Magnetic_moment, is_varying = Is_varying)
 
 def print_energies(Is_varying):
@@ -181,13 +181,13 @@ def bulk_modulus():
     print((planck_con/boltz_con)*debye_freq**(1/3))
 
 
-#plot_from_db_two_db('lattice_constant','single_fe.db','fe_kpts.db')
+plot_from_db_two_db('energy_cutoff','fe_1atom.db','fe_kpts.db')
 #plot_from_db('lattice_constant','single_fe_BLYP.db')
-#plt.show()
+plt.show()
 #bulk_modulus()
 #plot_from_db('lattice_constant', 'single_cu_xc_BLYP.db')
 #plt.show()
-show_min_lc()
+#show_min_lc()
 #plt.savefig('my_fig.png')
 #plot_from_db('lattice_constant', 'single_cu_xc_LDA2.db')
 #plt.show()
