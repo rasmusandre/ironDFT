@@ -181,9 +181,12 @@ def bulk_modulus():
     print((planck_con/boltz_con)*debye_freq**(1/3))
 
 
-plot_from_db_two_db('energy_cutoff','fe_1atom.db','fe_kpts.db')
+
+
+#plot_from_db_two_db('energy_cutoff','fe_1atom.db','fe_kpts.db')
 #plot_from_db('lattice_constant','single_fe_BLYP.db')
-plt.show()
+#plt.show()
+
 #bulk_modulus()
 #plot_from_db('lattice_constant', 'single_cu_xc_BLYP.db')
 #plt.show()

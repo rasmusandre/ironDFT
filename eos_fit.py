@@ -6,14 +6,17 @@ from pylab import * #this includes numpy as np!
 from scipy.optimize import leastsq
 from ase_db import plot_from_db
 import matplotlib.pyplot as plt
+import numpy as np
 # raw data from 2.2.3-al-analyze-eos.py
 v = np.array([13.72, 14.83, 16.0, 17.23, 18.52])
 e = np.array([-56.29, -56.41, -56.46, -56.46, -56.42])
 
-e, v = plot_from_db('lattice_constant', 'single_cu.db')
+e, v = plot_from_db('lattice_constant', 'single_fe.db')
 plt.clf()
 e = np.array([i for i in e])
-v = np.array([k**3/4 for k in v]) #Divide by two for bcc, divide by four for fcc
+v = np.array([(k**3)/2 for k in v]) #Divide by two for bcc, divide by four for fcc
+list1, list2 = (list(t) for t in zip(*sorted(zip(e, v))))
+print(list2)
 #print(e,v)
 #make a vector to evaluate fits on with a lot of points so it looks smooth
 vfit = np.linspace(min(v),max(v),100)

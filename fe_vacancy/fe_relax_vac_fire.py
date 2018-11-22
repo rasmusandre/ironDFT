@@ -1,7 +1,6 @@
 from ase.build import bulk
 from ase.db import connect
 from ase.optimize.precon import PreconLBFGS, Exp, PreconFire
-from ase.optimize import BFGS
 from ase.visualize import view
 from ase.io.trajectory import Trajectory
 from gpaw import GPAW, PW, FermiDirac, restart

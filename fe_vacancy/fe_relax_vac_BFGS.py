@@ -2,6 +2,7 @@ from ase.build import bulk
 from ase.db import connect
 from ase.optimize.precon import PreconLBFGS, Exp, PreconFire
 from ase.optimize import BFGS
+from ase.constraints import UnitCellFilter
 from ase.visualize import view
 from ase.io.trajectory import Trajectory
 from gpaw import GPAW, PW, FermiDirac, restart
@@ -71,13 +72,14 @@ if __name__ == "__main__":
         #calc.write('Fe_relaxer_initial.gpw')
         save_atoms(bulk_mat, e_cut, nbands, k_pts, smear, a, initial_magmom, 1, str(sys.argv[6]))
 
-    precon = Exp()
+
     saver = Gpw_save(calc, system_name + '_relaxed.gpw')
     traj = Trajectory(system_name + '_relaxed.traj', 'w', bulk_mat)
-    relaxer = PreconFire(bulk_mat, precon=precon, variable_cell = True, logfile = system_name + '.txt')
+    ucf = UnitCellFilter(bulk_mat)
+    relaxer = BFGS(ucf, logfile = system_name + '.txt')
     relaxer.attach(traj)
     relaxer.attach(saver)
-    relaxer.run(fmax = 0.025, smax = 0.003)
+    relaxer.run(fmax = 0.025)
     bulk_mat.get_potential_energy()
 
     #Save the final state of the calculations

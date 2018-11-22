@@ -1,5 +1,5 @@
 from ase.build import bulk
-from ase import Atom
+from ase import Atom, Atoms
 from ase.db import connect
 from ase.optimize.precon import PreconLBFGS
 from ase.visualize import view
@@ -36,7 +36,7 @@ if __name__ == "__main__":
 
 
     #Main arguments:
-    a = 2.86
+    a = 3.62
     e_cut = int(sys.argv[1])
     nbands = int(sys.argv[2])
     xc = 'PBE'
@@ -54,26 +54,32 @@ if __name__ == "__main__":
     else:
         #Initialize new calculations
 
-        bulk_mat = bulk('Fe','bcc',a)
-        bulk_mat.set_initial_magnetic_moments([initial_magmom])
-        bulk_mat = bulk_mat*(atoms,atoms,atoms)
+        bulk_mat = bulk('Cu','fcc',a)
+        bulk_mat = bulk_mat*(2,1,1)
 
         #del bulk_mat[[atom.index for atom in bulk_mat if atom.index == 0]]
 
-        bul = Atom('Cu', (0,0,0))
-        view(bul)
-        time.sleep(120)
+        del bulk_mat[[atom.index for atom in bulk_mat if atom.index == 0]]
+        new_atom = Atom('Fe')
+        #new_atom.set_initial_magnetic_moments([initial_magmom])
+        bulk_mat.append(new_atom)
+        #bulk_mat.set_initial_magnetic_moments([2.2, 0])
+
+        #view(bulk_mat)
+
 
         calc = GPAW(mode=PW(e_cut), nbands = nbands,
                     xc='PBE', spinpol=True, kpts=(k_pts,k_pts,k_pts),
                     occupations=FermiDirac(smear), txt=system_name + '.out')
 
         bulk_mat.set_calculator(calc)
+        #print(bulk_mat.get_magnetic_moment())
+        #time.sleep(120)
         #Save the initial state of the calculations
         #calc.write('Fe_relaxer_initial.gpw')
         save_atoms(bulk_mat, e_cut, nbands, k_pts, smear, a, initial_magmom, 1, str(sys.argv[6]))
 
-
+    
     saver = Gpw_save(calc, system_name + '_relaxed.gpw')
     traj = Trajectory(system_name + '_relaxed.traj', 'w', bulk_mat)
     relaxer = PreconLBFGS(bulk_mat, variable_cell = True, logfile = system_name + '.txt')
@@ -81,7 +87,7 @@ if __name__ == "__main__":
     relaxer.attach(saver)
     relaxer.run(fmax = 0.025, smax = 0.003)
     bulk_mat.get_potential_energy()
-
+    print(bulk_mat.get_magnetic_moments())
     #Save the final state of the calculations
     calc.write(system_name + '_relaxer_final.gpw')
     save_atoms(bulk_mat, e_cut, nbands, k_pts, smear, a, initial_magmom, 0, str(sys.argv[6]))

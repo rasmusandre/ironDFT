@@ -45,4 +45,5 @@ def create_plt(database):
     plt.show()
 
 db = 'fe_phon_band.db'
+
 create_plt(db)
