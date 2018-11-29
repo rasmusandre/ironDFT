@@ -16,20 +16,20 @@ k = 3
 # Perform standard ground state calculation (with plane wave basis)
 #si =  Atoms('Fe', scaled_positions=[(0, 0, 0)], magmoms=[k], cell=(b, b, b), pbc=True)
 si, calc2 = restart('1fe1cu_relaxer_final.gpw', txt = None)
-
-calc = GPAW(mode=PW(600),
-            xc='PBE',
-            kpts=(8, 8, 8),
-            random=True,  # random guess (needed if many empty bands required)
-            occupations=FermiDirac(0.1),
-            txt='Si_gs.txt')
-si.calc = calc
-si.get_potential_energy()
-calc.write('Si_gs.gpw')
+#
+# calc = GPAW(mode=PW(600),
+#             xc='PBE',
+#             kpts=(8, 8, 8),
+#             random=True,  # random guess (needed if many empty bands required)
+#             occupations=FermiDirac(0.1),
+#             txt='Si_gs.txt')
+# si.calc = calc
+# si.get_potential_energy()
+# calc.write('Si_gs.gpw')
 # P2
 # Restart from ground state and fix potential:
-calc = GPAW('Si_gs.gpw',
-            nbands=-16,
+calc = GPAW('1fe1cu_relaxer_final.gpw',
+            nbands=16,
             fixdensity=True,
             symmetry='off',
             kpts={'path': 'GXWLGK', 'npoints': 60},

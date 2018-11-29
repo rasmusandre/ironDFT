@@ -55,7 +55,7 @@ if __name__ == "__main__":
         #Initialize new calculations
 
         bulk_mat = bulk('Cu','fcc',a)
-        bulk_mat = bulk_mat*(2,1,1)
+        bulk_mat = bulk_mat*(2,2,3)
 
         #del bulk_mat[[atom.index for atom in bulk_mat if atom.index == 0]]
 
@@ -79,7 +79,7 @@ if __name__ == "__main__":
         #calc.write('Fe_relaxer_initial.gpw')
         save_atoms(bulk_mat, e_cut, nbands, k_pts, smear, a, initial_magmom, 1, str(sys.argv[6]))
 
-    
+
     saver = Gpw_save(calc, system_name + '_relaxed.gpw')
     traj = Trajectory(system_name + '_relaxed.traj', 'w', bulk_mat)
     relaxer = PreconLBFGS(bulk_mat, variable_cell = True, logfile = system_name + '.txt')
