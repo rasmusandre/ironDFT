@@ -6,14 +6,14 @@
  |___|_|             
 
 User:   rasmus@AsusN550
-Date:   Wed Oct 31 11:22:38 2018
+Date:   Tue Dec  4 14:35:11 2018
 Arch:   x86_64
-Pid:    8352
+Pid:    13014
 Python: 3.6.3
 gpaw:   /home/rasmus/anaconda3/lib/python3.6/site-packages/gpaw
 _gpaw:  /home/rasmus/anaconda3/lib/python3.6/site-packages/
         _gpaw.cpython-36m-x86_64-linux-gnu.so
-ase:    /home/rasmus/.local/lib/python3.6/site-packages/ase (version 3.16.2)
+ase:    /home/rasmus/anaconda3/lib/python3.6/site-packages/ase (version 3.17.0)
 numpy:  /home/rasmus/.local/lib/python3.6/site-packages/numpy (version 1.15.1)
 scipy:  /home/rasmus/.local/lib/python3.6/site-packages/scipy (version 1.1.0)
 units:  Angstrom and eV
@@ -144,7 +144,7 @@ Hamiltonian:
  
 
 Memory estimate:
-  Process memory now: 89.54 MiB
+  Process memory now: 89.45 MiB
   Calculator: 5.63 MiB
     Density: 0.85 MiB
       Arrays: 0.46 MiB
@@ -203,38 +203,38 @@ Effective grid spacing dv^(1/3) = 0.1892
 
                      log10-error:    total        iterations:
            time      wfs    density  energy       fermi  poisson  magmom
-iter:   1  11:22:41  +2.35   +inf    -8.839983    2               +2.1188
-iter:   2  11:22:42  +0.39   +inf    -8.916729    2               +2.1164
-iter:   3  11:22:43  -0.82   +inf    -8.927202    2               +2.1162
-iter:   4  11:22:43  -0.82  -1.44    -8.963709    3               +2.1033
-iter:   5  11:22:44  -0.60  -1.49    -8.955860    31              +2.1282
-iter:   6  11:22:45  -1.34  -1.78    -8.993218    4               +2.1548
-iter:   7  11:22:45  -1.03  -1.89    -9.024442    4               +2.1564
-iter:   8  11:22:46  -1.96  -2.60    -9.025238    3               +2.1604
-iter:   9  11:22:47  -2.42  -3.04    -9.025514    3               +2.1641
-iter:  10  11:22:48  -2.48  -2.60    -9.025430    3               +2.1613
-iter:  11  11:22:48  -3.37  -2.87    -9.025713    2               +2.1630
-iter:  12  11:22:49  -3.24  -2.95    -9.025945    3               +2.1652
-iter:  13  11:22:50  -4.22  -3.41    -9.025970    1               +2.1649
-iter:  14  11:22:51  -3.92  -3.40    -9.025849    3               +2.1652
-iter:  15  11:22:52  -4.66  -3.16    -9.025846    2               +2.1652
-iter:  16  11:22:53  -4.49  -3.15    -9.025935    2               +2.1651
-iter:  17  11:22:54  -4.70  -3.50    -9.025945    2               +2.1653
-iter:  18  11:22:54  -4.96  -3.39    -9.025947    1               +2.1654
-iter:  19  11:22:55  -4.01  -3.41    -9.025899    2               +2.1672
-iter:  20  11:22:56  -4.22  -3.35    -9.025940    2               +2.1665
-iter:  21  11:22:56  -4.98  -3.74    -9.025928    2               +2.1671
-iter:  22  11:22:57  -5.48  -3.76    -9.025930    2               +2.1673
-iter:  23  11:22:58  -6.28  -3.98    -9.025929    2               +2.1674
-iter:  24  11:22:59  -6.52  -4.00    -9.025929    2               +2.1674
-iter:  25  11:23:00  -6.12  -4.03    -9.025931    2               +2.1672
-iter:  26  11:23:01  -5.30  -4.20    -9.025940    2               +2.1667
-iter:  27  11:23:01  -5.95  -4.41    -9.025936    2               +2.1669
-iter:  28  11:23:02  -6.76  -4.49    -9.025937    2               +2.1668
-iter:  29  11:23:03  -6.80  -4.60    -9.025938    2               +2.1668
-iter:  30  11:23:04  -7.31  -4.76    -9.025937    2               +2.1668
-iter:  31  11:23:04  -7.23  -4.97    -9.025937    2               +2.1668
-iter:  32  11:23:05  -8.21  -5.44    -9.025937    1               +2.1668
+iter:   1  14:35:14  +2.35   +inf    -8.839983    2               +2.1188
+iter:   2  14:35:15  +0.39   +inf    -8.916729    2               +2.1164
+iter:   3  14:35:16  -0.82   +inf    -8.927202    2               +2.1162
+iter:   4  14:35:19  -0.82  -1.44    -8.963709    3               +2.1033
+iter:   5  14:35:20  -0.60  -1.49    -8.955860    31              +2.1282
+iter:   6  14:35:23  -1.34  -1.78    -8.993218    4               +2.1548
+iter:   7  14:35:24  -1.03  -1.89    -9.024442    4               +2.1564
+iter:   8  14:35:26  -1.96  -2.60    -9.025238    3               +2.1604
+iter:   9  14:35:28  -2.42  -3.04    -9.025514    3               +2.1641
+iter:  10  14:35:29  -2.48  -2.60    -9.025430    3               +2.1613
+iter:  11  14:35:31  -3.37  -2.87    -9.025713    2               +2.1630
+iter:  12  14:35:32  -3.24  -2.95    -9.025945    3               +2.1652
+iter:  13  14:35:33  -4.22  -3.41    -9.025970    1               +2.1649
+iter:  14  14:35:34  -3.92  -3.40    -9.025849    3               +2.1652
+iter:  15  14:35:36  -4.66  -3.16    -9.025846    2               +2.1652
+iter:  16  14:35:37  -4.49  -3.15    -9.025935    2               +2.1651
+iter:  17  14:35:38  -4.70  -3.50    -9.025945    2               +2.1653
+iter:  18  14:35:39  -4.96  -3.39    -9.025947    1               +2.1654
+iter:  19  14:35:40  -4.01  -3.41    -9.025899    2               +2.1672
+iter:  20  14:35:42  -4.22  -3.35    -9.025940    2               +2.1665
+iter:  21  14:35:43  -4.98  -3.74    -9.025928    2               +2.1671
+iter:  22  14:35:45  -5.48  -3.76    -9.025930    2               +2.1673
+iter:  23  14:35:46  -6.28  -3.98    -9.025929    2               +2.1674
+iter:  24  14:35:47  -6.52  -4.00    -9.025929    2               +2.1674
+iter:  25  14:35:49  -6.12  -4.03    -9.025931    2               +2.1672
+iter:  26  14:35:50  -5.30  -4.20    -9.025940    2               +2.1667
+iter:  27  14:35:51  -5.95  -4.41    -9.025936    2               +2.1669
+iter:  28  14:35:53  -6.76  -4.49    -9.025937    2               +2.1668
+iter:  29  14:35:54  -6.80  -4.60    -9.025938    2               +2.1668
+iter:  30  14:35:55  -7.31  -4.76    -9.025937    2               +2.1668
+iter:  31  14:35:57  -7.23  -4.97    -9.025937    2               +2.1668
+iter:  32  14:35:57  -8.21  -5.44    -9.025937    1               +2.1668
 
 Converged after 32 iterations.
 
@@ -277,59 +277,59 @@ Writing to Si_gs.gpw (mode='')
 
 Timing:                              incl.     excl.
 -----------------------------------------------------------
-Hamiltonian:                         0.249     0.000   0.0% |
- Atomic:                             0.217     0.013   0.0% |
-  XC Correction:                     0.204     0.204   0.1% |
+Hamiltonian:                         0.285     0.000   0.0% |
+ Atomic:                             0.253     0.048   0.0% |
+  XC Correction:                     0.205     0.205   0.1% |
  Calculate atomic Hamiltonians:      0.001     0.001   0.0% |
  Communicate:                        0.000     0.000   0.0% |
  Initialize Hamiltonian:             0.000     0.000   0.0% |
  Poisson:                            0.000     0.000   0.0% |
  XC 3D grid:                         0.031     0.031   0.0% |
-LCAO initialization:                 0.865     0.051   0.0% |
- LCAO eigensolver:                   0.517     0.001   0.0% |
+LCAO initialization:                 0.942     0.058   0.0% |
+ LCAO eigensolver:                   0.557     0.001   0.0% |
   Calculate projections:             0.001     0.001   0.0% |
   DenseAtomicCorrection:             0.003     0.003   0.0% |
   Distribute overlap matrix:         0.001     0.001   0.0% |
   Orbital Layouts:                   0.003     0.003   0.0% |
-  Potential matrix:                  0.270     0.270   0.1% |
-  Sum over cells:                    0.238     0.238   0.1% |
- LCAO to grid:                       0.164     0.164   0.0% |
- Set positions (LCAO WFS):           0.134     0.001   0.0% |
-  Basic WFS set positions:           0.001     0.001   0.0% |
+  Potential matrix:                  0.272     0.272   0.1% |
+  Sum over cells:                    0.276     0.276   0.1% |
+ LCAO to grid:                       0.154     0.154   0.1% |
+ Set positions (LCAO WFS):           0.172     0.001   0.0% |
+  Basic WFS set positions:           0.002     0.002   0.0% |
   Basis functions set positions:     0.000     0.000   0.0% |
-  TCI: Calculate S, T, P:            0.132     0.132   0.0% |
+  TCI: Calculate S, T, P:            0.170     0.170   0.1% |
 PWDescriptor:                        0.003     0.003   0.0% |
-SCF-cycle:                          25.469     0.358   0.1% |
- Davidson:                          15.999     5.408   1.6% ||
-  Subspace diag:                     3.948     0.132   0.0% |
-   calc_h_matrix:                    2.127     2.127   0.6% |
-   diagonalize:                      1.262     1.262   0.4% |
-   rotate_psi:                       0.426     0.426   0.1% |
-  calc. matrices:                    2.990     2.990   0.9% |
-  diagonalize:                       3.271     3.271   1.0% |
-  rotate_psi:                        0.382     0.382   0.1% |
- Density:                            2.299     0.001   0.0% |
-  Atomic density matrices:           0.083     0.083   0.0% |
-  Mix:                               0.418     0.418   0.1% |
-  Multipole moments:                 0.009     0.009   0.0% |
-  Pseudo density:                    1.789     1.375   0.4% |
-   Symmetrize density:               0.414     0.414   0.1% |
- Hamiltonian:                        6.320     0.009   0.0% |
-  Atomic:                            5.278     0.244   0.1% |
-   XC Correction:                    5.034     5.034   1.5% ||
-  Calculate atomic Hamiltonians:     0.019     0.019   0.0% |
+SCF-cycle:                          44.640     0.550   0.3% |
+ Davidson:                          33.448    10.283   5.2% |-|
+  Subspace diag:                     9.998     0.211   0.1% |
+   calc_h_matrix:                    5.914     5.914   3.0% ||
+   diagonalize:                      3.347     3.347   1.7% ||
+   rotate_psi:                       0.526     0.526   0.3% |
+  calc. matrices:                    5.709     5.709   2.9% ||
+  diagonalize:                       6.989     6.989   3.6% ||
+  rotate_psi:                        0.468     0.468   0.2% |
+ Density:                            3.285     0.001   0.0% |
+  Atomic density matrices:           0.088     0.088   0.0% |
+  Mix:                               0.319     0.319   0.2% |
+  Multipole moments:                 0.004     0.004   0.0% |
+  Pseudo density:                    2.874     2.518   1.3% ||
+   Symmetrize density:               0.356     0.356   0.2% |
+ Hamiltonian:                        7.170     0.016   0.0% |
+  Atomic:                            6.102     0.490   0.2% |
+   XC Correction:                    5.612     5.612   2.9% ||
+  Calculate atomic Hamiltonians:     0.024     0.024   0.0% |
   Communicate:                       0.000     0.000   0.0% |
   Poisson:                           0.004     0.004   0.0% |
-  XC 3D grid:                        1.011     1.011   0.3% |
- Orthonormalize:                     0.493     0.004   0.0% |
-  calc_s_matrix:                     0.013     0.013   0.0% |
-  inverse-cholesky:                  0.451     0.451   0.1% |
-  projections:                       0.019     0.019   0.0% |
-  rotate_psi_s:                      0.006     0.006   0.0% |
-Set symmetry:                        0.033     0.033   0.0% |
-Other:                             314.348   314.348  92.2% |------------------------------------|
+  XC 3D grid:                        1.024     1.024   0.5% |
+ Orthonormalize:                     0.187     0.005   0.0% |
+  calc_s_matrix:                     0.011     0.011   0.0% |
+  inverse-cholesky:                  0.140     0.140   0.1% |
+  projections:                       0.022     0.022   0.0% |
+  rotate_psi_s:                      0.008     0.008   0.0% |
+Set symmetry:                        0.036     0.036   0.0% |
+Other:                             150.131   150.131  76.6% |------------------------------|
 -----------------------------------------------------------
-Total:                                       340.967 100.0%
+Total:                                       196.037 100.0%
 
-Memory usage: 144.43 MiB
-Date: Wed Oct 31 11:28:19 2018
+Memory usage: 146.85 MiB
+Date: Tue Dec  4 14:38:27 2018

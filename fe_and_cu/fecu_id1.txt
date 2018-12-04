@@ -1,0 +1,2 @@
+      Step     Time          Energy         fmax
+BFGS:    0 09:10:49      -71.664402        1.1008
