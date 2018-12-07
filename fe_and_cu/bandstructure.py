@@ -11,12 +11,48 @@ from ase.visualize import view
 from gpaw import GPAW, PW, FermiDirac, restart
 import matplotlib.pyplot as plt
 import numpy as np
-b = 2.86
-k = 3
+from ase.optimize import BFGS
+from ase.constraints import UnitCellFilter
+
+class Gpw_save(object):
+
+    def __init__(self, calc, txtname):
+
+        self.calc = calc
+        self.txtname = txtname
+
+    def __call__(self):
+
+        self.calc.write(self.txtname)
 # Perform standard ground state calculation (with plane wave basis)
 #si =  Atoms('Fe', scaled_positions=[(0, 0, 0)], magmoms=[k], cell=(b, b, b), pbc=True)
-si, calc2 = restart('1fe1cu_relaxer_final.gpw', txt = None)
+
+# si = bulk('Fe','bcc', a=3.1)*(2,1,1)
 #
+# for atom in si:
+#
+#     if atom.index == 0:
+#
+#         atom.symbol = 'Cu'
+#     else:
+#
+#         atom.magmom = 2.2
+
+system_name = 'fecu2'
+# calc = GPAW(mode=PW(500), xc='PBE', kpts=(8,8,8), nbands=-10, spinpol=True, occupations=FermiDirac(0.1), txt=system_name+'.out')
+# si.set_calculator(calc)
+# si, calc = restart(system_name + '_relaxed.gpw', txt=None)
+# saver = Gpw_save(calc, system_name + '_relaxed.gpw')
+#
+#
+# ucf = UnitCellFilter(si)
+# relaxer = BFGS(ucf, logfile = system_name + '.txt')
+# relaxer.attach(saver)
+# relaxer.run(fmax = 0.025)
+# si.get_potential_energy()
+# calc.write(system_name + '.gpw')
+
+
 # calc = GPAW(mode=PW(600),
 #             xc='PBE',
 #             kpts=(8, 8, 8),
@@ -28,17 +64,18 @@ si, calc2 = restart('1fe1cu_relaxer_final.gpw', txt = None)
 # calc.write('Si_gs.gpw')
 # P2
 # Restart from ground state and fix potential:
-calc = GPAW('1fe1cu_relaxer_final.gpw',
+calc = GPAW(system_name + '_relaxed.gpw',
             nbands=16,
             fixdensity=True,
             symmetry='off',
-            kpts={'path': 'GXWLGK', 'npoints': 60},
-            convergence={'bands': 8}, txt='Si2_gs.txt')
-
-calc.get_potential_energy()
-# e_f = calc.get_fermi_level()
-# e1, dos1 = calc.get_dos(spin=1, npts=2001, width=0.1) #What is spin?
-# e0, dos0 = calc.get_dos(spin=0, npts=2001, width=0.1)
+            kpts={'path': 'GHPNG', 'npoints': 60},
+            convergence={'bands': 8}, txt='Fecu_gs.txt')
+bulk_mat, calc = restart('fecu2_relaxed.gpw',txt=None)#, kpts={'path': 'GHPNG', 'npoints': 60}, convergence={'bands': 8}, symmetry='off')
+bulk_mat.set_calculator(calc)
+bulk_mat.get_potential_energy()
+e_f = calc.get_fermi_level()
+e1, dos1 = calc.get_dos(spin=1, npts=2001, width=0.1) #What is spin?
+e0, dos0 = calc.get_dos(spin=0, npts=2001, width=0.1)
 #
 # plt.figure(0)
 # plt.plot(dos1, e1)
@@ -54,8 +91,9 @@ calc.get_potential_energy()
 # print(e_f)
 # P3
 bs = calc.band_structure()
+
 bs.write('my_js.js')
-bs.plot(filename='bandstructure2.pdf',ylabel = 'Energies [eV]', show=True, emax=10.0)
+bs.plot(filename='bandstructurefecu.pdf',ylabel = 'Energies [eV]', show=True, emax=10.0)
 # print(bs.energies)
 #
 # my_sum = {}
