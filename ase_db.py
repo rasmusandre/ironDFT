@@ -81,6 +81,7 @@ def plot_from_db_two_db(Is_varying, database_name1, database_name2):
     plt.figure(0)
 
     if (Is_varying == 'k_points'):
+        changing_parameter1 = [i**3 for i in changing_parameter1]
         plt.semilogx(changing_parameter1, energies1,'b')
         plt.semilogx(changing_parameter1, energies1, 'bo',label='_nolegend_')
     else:
@@ -99,14 +100,15 @@ def plot_from_db_two_db(Is_varying, database_name1, database_name2):
 
 
     if (Is_varying == 'k_points'):
+        changing_parameter2 = [i**3 for i in changing_parameter2]
         plt.semilogx(changing_parameter2, energies2,'r')
         plt.semilogx(changing_parameter2, energies2, 'r+',label='_nolegend_')
-        plt.xlabel('number of k-points')
+        plt.xlabel('Number of k-points')
     else:
         if (Is_varying == 'smearing_factor'):
             plt.plot([k/(8.62*10**-5) for k in changing_parameter2], energies2,'r')
             plt.plot([k/(8.62*10**-5) for k in changing_parameter2], energies2, 'r+',label='_nolegend_')
-            plt.xlabel('smearing factor [K]')
+            plt.xlabel('Smearing factor [K]')
         else:
             if (Is_varying == 'energy_cutoff'):
                 changing_parameter2, energies2 = (list(t) for t in zip(*sorted(zip(changing_parameter2, energies2))))
@@ -183,9 +185,9 @@ def bulk_modulus():
 
 
 
-#plot_from_db_two_db('energy_cutoff','fe_1atom.db','fe_kpts.db')
+plot_from_db_two_db('smearing_factor','fe_1atom.db','fe_kpts.db')
 #plot_from_db('lattice_constant','single_fe_BLYP.db')
-#plt.show()
+plt.show()
 
 #bulk_modulus()
 #plot_from_db('lattice_constant', 'single_cu_xc_BLYP.db')

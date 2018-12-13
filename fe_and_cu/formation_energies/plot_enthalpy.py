@@ -46,7 +46,7 @@ def find_atoms():
 
     db = connect('fecu_8atoms_first.db')
 
-    atom1 = db.get_atoms(id=20)
+    atom1 = db.get_atoms(id=24)
     view(atom1)
 
 
