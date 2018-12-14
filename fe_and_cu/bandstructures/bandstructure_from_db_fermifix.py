@@ -67,21 +67,28 @@ e1, dos1 = calc.get_dos(spin=1, npts=2001, width=0.1) #What is spin?
 e0, dos0 = calc.get_dos(spin=0, npts=2001, width=0.1)
 
 plt.figure(0)
-plt.plot(dos1, e1)
-plt.plot(dos0, e0)
-plt.plot([0,9], e_f*np.ones(2),'r--')
-plt.ylim(0,e_f+10)
+plt.plot(dos1, [i - e_f for i in e1], 'b')
+plt.plot(dos0, [i - e_f for i in e0], 'y')
+plt.plot([0,10], [0,0],'r--')
+plt.ylim(-12.5, 12.5)
 plt.xlim(0,9)
 plt.legend(['DOS spin down','DOS spin up', 'Fermi level'],fancybox=True, framealpha=1,shadow=True,prop={'size': 10})
 plt.xlabel('Density of states [1/eV]')
 plt.ylabel('Energy [eV]')
-plt.show()
+
 #
 # print(e_f)
 # P3
 bs = calc.band_structure()
 bs.write('my_js.js')
-bs.plot(filename='bandstructure_fecu_8atoms.pdf',ylabel = 'Energies [eV]', show=True, emin=-e_f, emax=10)
+
+for i in range(0,len(bs.energies)):
+    for k in range(0, len(bs.energies[i])):
+        for j in range(0, len(bs.energies[i][k])):
+            bs.energies[i][k][j] = bs.energies[i][k][j] - e_f
+bs.reference = 0
+
+bs.plot(filename='bandstructure_fecu_8atoms.pdf',ylabel = 'Energies [eV]', show=True, emin=-12.5, emax=12.5)
 # print(bs.energies)
 #
 # my_sum = {}
